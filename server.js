@@ -2,6 +2,9 @@ import express from 'express';
 import path from 'path';
 import url from 'url';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,7 +21,6 @@ app.post('/submit', (req, res)=>{
     const data = req.body;
     if(data == undefined) res.status(403).send('the body is undefined!');
     const {fName, lName, age, stuCode, natCode} = data;
-    console.log(fName);
     const newData = {
         fullName: `${fName} ${lName}`,
         age: age,
@@ -38,7 +40,6 @@ app.get('/users/:fullName', (req, res)=>{
         if(err) console.error('There has been an error: ', err.message);
         else {
             const parsedData = JSON.parse(data);
-            console.log(parsedData.age);
             res.status(201).send(parsedData);
             console.log('file read successfully!');
         }
