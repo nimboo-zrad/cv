@@ -18,6 +18,36 @@
     font-style: normal;
 }
 
+@media (max-widht: 575px){
+	*{
+		font-size: 10px;
+	}
+}
+
+@media (min-width: 576px) and (max-width: 767px){
+	*{
+		font-size: 12px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+	*{
+		font-size: 14px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px){
+	*{
+		font-size: 16px;
+	}
+}
+
+@media (min-width: 1200px){
+	*{
+		font-size: 18px;
+	}
+}
+
 body{
     background-repeat: no-repeat;
     background-size: cover;
@@ -102,17 +132,3 @@ input:active{
 .two, .three, .four{
     display: none;
 } 
-
-@media(orientation: portrait) {
-
-}
-
-@media(orientation: landscape) {
-    *{
-        font-size: 18px;
-    }
-
-    body{
-        background-image: url('./committee.png');
-    }
-}
