@@ -26,7 +26,7 @@
 
 @media (min-width: 576px) and (max-width: 767px){
 	*{
-		font-size: 12px;
+		font-size: 10px;
 	}
 }
 
@@ -34,45 +34,43 @@
 	*{
 		font-size: 14px;
 	}
-	body{
-		background-image: url('./committee.png');
-	}
 }
 
 @media (min-width: 992px) and (max-width: 1199px){
 	*{
 		font-size: 16px;
 	}
-	body{
-		background-image: url('./committee.png');
-	}
 }
 
 @media (min-width: 1200px){
 	*{
-		font-size: 18px;
+		font-size: 20px;
 	}
-	
-	body{
-		background-image: url('./committee.png');
-	}
+}
+
+@media (orientation: landscape){
+    body{
+        background-image: url('./committee.png');
+    }
 }
 
 body{
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center center;
     width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
     max-height: 100vh;
 }
 
 form{
-    width: 30vw;
-    height: 90vh;
+    width: 35vw;
+    height: 85vh;
     position: relative;
-    border: solid #423f32 .1rem;
-    margin-top: 5vh;
-    margin-left: 60vw;
+    top: 7.5vh;
+    margin-left: 57.5vw;
+    box-sizing: border-box;
 }
 
 .page{
@@ -84,18 +82,21 @@ form{
     padding: 5%;
     box-sizing: border-box;
     font-family: reborn;
+    border: solid #423f32 .1rem;
 }
 
-.page legend{
-    margin: 5% auto;
-    font-size: 1.5rem;
+legend{
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
 }
 
 label{
+    height: 5%;
     font-family: 'roboto';
     display: block;
-    margin-bottom: .5rem;
-    margin-left: .5rem;
+    margin-bottom: 2%;
+    margin-left: 2%;
 }
 
 input[type=text]{
@@ -108,17 +109,18 @@ input[type=text]{
     margin-left: 1rem;
     padding-left: .5rem;
     box-sizing: border-box;
-    margin-bottom: 1rem;
+    margin-bottom: 5%;
 }
 
 input[type=submit]{
-    width: 5vw;
-    height: 5%;
+    width: 25%;
+    height: 7.5%;
     background-color: #423f32;
     border: none;
     color: #eae0c8;
-    margin-top: 1rem;
-    margin-left: calc(100% - 6vw);
+    position: relative;
+    top: 9%;
+    left: 75%;
     border-radius: 0.5rem;
     font-size: 0.75rem;
     font-family: roboto;
