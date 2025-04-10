@@ -21,33 +21,33 @@
 }
 
 @media (max-widht: 575px){
-	*{
-		font-size: 10px;
-	}
+    *{
+        font-size: 10px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767px){
-	*{
-		font-size: 10px;
-	}
+    *{
+        font-size: 10px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px){
-	*{
-		font-size: 14px;
-	}
+    *{
+        font-size: 14px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199px){
-	*{
-		font-size: 16px;
-	}
+    *{
+        font-size: 16px;
+    }
 }
 
 @media (min-width: 1200px){
-	*{
-		font-size: 20px;
-	}
+    *{
+        font-size: 20px;
+    }
 }
 
 @media (orientation: landscape){
@@ -56,28 +56,28 @@
     }
     
     .portrait{
-    	display: none;
+        display: none;
     }
 }
 
 @media (orientation: portrait){
-	.form{
-		display: none;
-	}
-	
-	.portrait{
-		display: flex;
-		width: 100vw;
-		height: 100vh;
-		justify-content: center;
-		align-items: center;
-		background-color: beige;
-	}
-	
-	h1{
-		font-family: 'reborn';
-		font-size: 5vw;
-	}
+    .form{
+        display: none;
+    }
+    
+    .portrait{
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: beige;
+    }
+    
+    h1{
+        font-family: 'reborn';
+        font-size: 5vw;
+    }
 }
 
 body{
@@ -116,7 +116,7 @@ form{
 }
 
 legend{
-	font-size: 1.4rem;
+    font-size: 1.4rem;
     font-weight: 600;
     border: none;
     max-height: 5vh;
@@ -125,8 +125,8 @@ legend{
 }
 
 .inputContainer{
-	width: 100%;
-	height: 19%;
+    width: 100%;
+    height: 19%;
 }
 
 label{
@@ -177,49 +177,49 @@ input:active{
 }
 
 .one{
-	z-index: 999;
+    z-index: 999;
 }
 
 .totalAreaContainer{
-	width: 100%;
-	height: 90%;
-	max-height: 90%;
-	display: flex;
-	flex-direction: column;
-	overflow: auto;
+    width: 100%;
+    height: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .areaContainer{
-	width: 100%;
-	height: 20%;
-	margin-bottom: 5%;
+    width: 100%;
+    height: 20%;
+    margin-bottom: 5%;
 }
 
 .buttonContainer{
-	width: 100%;
-	height: 10%;
-	min-height: 10%;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	border-top: solid .1rem #423f32;
+    width: 100%;
+    height: 10%;
+    min-height: 10%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: solid .1rem #423f32;
 }
 
 .buttonContainer input{
-	height: 50%;
-	font-size: .5rem;
+    height: 50%;
+    font-size: .5rem;
 }
 
 textarea{
-	width: 90%;
-	height: auto;
-	min-height: 10%;
-	border: solid #423f32 .1rem;
-	border-radius: .1rem;
-	margin-left: 5%;
-	padding-left: 2%;
-	background-color: #b59a6f;
-	color: #423f32;
+    width: 90%;
+    height: auto;
+    min-height: 10%;
+    border: solid #423f32 .1rem;
+    border-radius: .1rem;
+    margin-left: 5%;
+    padding-left: 2%;
+    background-color: #b59a6f;
+    color: #423f32;
 }
 
 .two, .three, .four{

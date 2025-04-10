@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Committee</title>
-    <link rel="stylesheet" href="./src/styles.css" />
-    <script src="./src/script.js"></script>
-</head>
-<body>
-	<div class="portrait">
-        <h1>Rotate your phone/tablet! </h1>
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Research Committee</title>
+        <link rel="stylesheet" href="./src/styles.css" />
+        <script src="./src/script.js"></script>
+    </head>
+    <body>
+	    <div class="portrait">
+            <h1>Rotate your phone/tablet! </h1>
+        </div>
         <form action="/submit" method="POST" class="form">
+
+            <!-- demographic information -->
             <fieldset class="page one">
                 <legend> Demographic Information: </legend>
 
                 <div class="inputContainer">
-                	<label for="fn">First Name: </label>
+                    <label for="fn">First Name: </label>
                     <input id="fn" type="text" name="firstName" spellcheck="false" placeholder="Enter your first name" required>
                 </div>
 
                 <div class="inputContainer">
-                	<label for="ln">Last Name: </label>
+                    <label for="ln">Last Name: </label>
                     <input id="ln" type="text" name="lastName" spellcheck="false" placeholder="Enter your last name" required>
                 </div>
 
@@ -29,8 +31,8 @@
                     <label for="nc">National Code: </label>
                     <input id="nc" type="text" name="natCode" spellcheck="false" placeholder="Enter your national code" required>
                 </div>
-                 
-                 <div class="inputContainer">
+                    
+                <div class="inputContainer">
                     <label for="sc">Student Code: </label>
                     <input id="sc" type="text" name="stuCode" spellcheck="false" placeholder="Enter your student code" required>
                 </div>
@@ -41,37 +43,37 @@
                 </div>
                 
                 <input type="button" value="Next" class="submit">
-                <div class="test"></div>
             </fieldset>
-            
-            
-            	<fieldset class="page two">
-            	    <legend>skills</legend>
-                    <div class="totalAreaContainer">
-                    	<div class="areaContainer">
-                    	    <label for="skill1">Skill 1:</label>
-                            <textarea id="skill1" name="skill_1" class="area" placeholder="If you don't have any leave this box empty and press next button!"> </textarea>
-                        </div>
+                
+            <!-- Skills -->    
+            <fieldset class="page two">
+                <legend>skills</legend>
+                <div class="totalAreaContainer">
+                    <div class="areaContainer">
+                        <label for="skill1">Skill 1:</label>
+                        <textarea id="skill1" name="skill_1" class="area" placeholder="If you don't have any leave this box empty and press next button!"> </textarea>
                     </div>
-                    <div class="buttonContainer">
-                    	<input type="button" value="Back" class="submit">
-                        <input type="button" value="add skill" class="addElem" >
-                        <input type="button" value="remove skill" class="removeElem" >
-                        <input type="button" value="Next" class="submit">
-                    </div>
-            	</fieldset>
-    
-                <fieldset class="page three">
-            	    <legend>research background</legend>
-                    <input type="button" value="Next" class="submit">
+                </div>
+                <div class="buttonContainer">
                     <input type="button" value="Back" class="submit">
-            	</fieldset>
-   
-                <fieldset class="page four">
-            	    <legend>1404</legend>
-                    <input type="button" value="Submit" class="submit">
-            	</fieldset>
-    
+                    <input type="button" value="add skill" class="addElem" >
+                    <input type="button" value="remove skill" class="removeElem" >
+                    <input type="button" value="Next" class="submit">
+                </div>
+            </fieldset>
+
+            <!-- Research Background -->
+            <fieldset class="page three">
+                <legend>research background</legend>
+                <input type="button" value="Next" class="submit">
+                <input type="button" value="Back" class="submit">
+            </fieldset>
+
+            <!-- Final Page -->
+            <fieldset class="page four">
+                <legend>1404</legend>
+                <input type="button" value="Submit" class="submit">
+            </fieldset>
         </form>
-</body>
+    </body>
 </html>
