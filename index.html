@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Committee</title>
     <link rel="stylesheet" href="./src/styles.css" />
-    <script src="scripts.js"></script>
+    <script src="./src/script.js"></script>
 </head>
 <body>
 	<div class="portrait">
@@ -40,12 +40,30 @@
                     <input type="text" name="age" spellcheck="false" placeholder="Enter your age" required>
                 </div>
                 
-                <input type="submit" value="Next" id="submitOne">
+                <input type="button" value="Next" class="submit">
                 <div class="test"></div>
             </fieldset>
-            <div class="page two"></div>
-            <div class="page three"></div>
-            <div class="page four"></div>
+            
+            
+            	<fieldset class="page two">
+            	    <legend>skills</legend>
+                    <input type="textarea" class="area" >
+                    <input type="button" value="add skills" class="addElem" >
+                    <input type="button" value="Next" class="submit">
+                    <input type="button" value="Back" class="submit">
+            	</fieldset>
+    
+                <fieldset class="page three">
+            	    <legend>research background</legend>
+                    <input type="button" value="Next" class="submit">
+                    <input type="button" value="Back" class="submit">
+            	</fieldset>
+   
+                <fieldset class="page four">
+            	    <legend>1404</legend>
+                    <input type="button" value="Submit" class="submit">
+            	</fieldset>
+    
         </form>
 </body>
 </html>
