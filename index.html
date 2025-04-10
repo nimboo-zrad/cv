@@ -16,28 +16,28 @@
                 <legend> Demographic Information: </legend>
 
                 <div class="inputContainer">
-                	<label for="fname">First Name: </label>
-                    <input type="text" name="fName" spellcheck="false" placeholder="Enter your first name" required>
+                	<label for="fn">First Name: </label>
+                    <input id="fn" type="text" name="firstName" spellcheck="false" placeholder="Enter your first name" required>
                 </div>
 
                 <div class="inputContainer">
-                	<label for="fname">Last Name: </label>
-                    <input type="text" name="lName" spellcheck="false" placeholder="Enter your last name" required>
+                	<label for="ln">Last Name: </label>
+                    <input id="ln" type="text" name="lastName" spellcheck="false" placeholder="Enter your last name" required>
                 </div>
 
                 <div class="inputContainer">
-                    <label for="fname">National Code: </label>
-                    <input type="text" name="natCode" spellcheck="false" placeholder="Enter your national code" required>
+                    <label for="nc">National Code: </label>
+                    <input id="nc" type="text" name="natCode" spellcheck="false" placeholder="Enter your national code" required>
                 </div>
                  
                  <div class="inputContainer">
-                    <label for="fname">Student Code: </label>
-                    <input type="text" name="stuCode" spellcheck="false" placeholder="Enter your student code" required>
+                    <label for="sc">Student Code: </label>
+                    <input id="sc" type="text" name="stuCode" spellcheck="false" placeholder="Enter your student code" required>
                 </div>
                 
                 <div class="inputContainer">
-                    <label for="fname">Age: </label>
-                    <input type="text" name="age" spellcheck="false" placeholder="Enter your age" required>
+                    <label for="age">Age: </label>
+                    <input id="age" type="text" name="age" spellcheck="false" placeholder="Enter your age" required>
                 </div>
                 
                 <input type="button" value="Next" class="submit">
@@ -47,10 +47,18 @@
             
             	<fieldset class="page two">
             	    <legend>skills</legend>
-                    <input type="textarea" class="area" >
-                    <input type="button" value="add skills" class="addElem" >
-                    <input type="button" value="Next" class="submit">
-                    <input type="button" value="Back" class="submit">
+                    <div class="totalAreaContainer">
+                    	<div class="areaContainer">
+                    	    <label for="skill1">Skill 1:</label>
+                            <textarea id="skill1" name="skill_1" class="area" placeholder="If you don't have any leave this box empty and press next button!"> </textarea>
+                        </div>
+                    </div>
+                    <div class="buttonContainer">
+                    	<input type="button" value="Back" class="submit">
+                        <input type="button" value="add skill" class="addElem" >
+                        <input type="button" value="remove skill" class="removeElem" >
+                        <input type="button" value="Next" class="submit">
+                    </div>
             	</fieldset>
     
                 <fieldset class="page three">

@@ -138,16 +138,17 @@ label{
 input[type=text]{
     width: 90%;
     height: 37%;
-    border: none;
     border-radius: .3rem;
     border: solid #423f32 .1rem;
     background-color: #b59a6f;
     margin-left: 5%;
     padding-left: 2%;
+    font-family: roboto;
+    font-size: 1rem;
 }
 
 input[type=button]{
-    width: 25%;
+    width: 20%;
     min-height: 5%;
     background-color: #423f32;
     border: none;
@@ -157,6 +158,7 @@ input[type=button]{
     font-family: reborn;
     font-weight: bold;
     margin: 0 auto;
+    text-align: center;
 }
 
 input[type=button]:hover{
@@ -176,6 +178,48 @@ input:active{
 
 .one{
 	z-index: 999;
+}
+
+.totalAreaContainer{
+	width: 100%;
+	height: 90%;
+	max-height: 90%;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+}
+
+.areaContainer{
+	width: 100%;
+	height: 20%;
+	margin-bottom: 5%;
+}
+
+.buttonContainer{
+	width: 100%;
+	height: 10%;
+	min-height: 10%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	border-top: solid .1rem #423f32;
+}
+
+.buttonContainer input{
+	height: 50%;
+	font-size: .5rem;
+}
+
+textarea{
+	width: 90%;
+	height: auto;
+	min-height: 10%;
+	border: solid #423f32 .1rem;
+	border-radius: .1rem;
+	margin-left: 5%;
+	padding-left: 2%;
+	background-color: #b59a6f;
+	color: #423f32;
 }
 
 .two, .three, .four{
