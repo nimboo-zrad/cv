@@ -47,7 +47,7 @@
                 
             <!-- Skills -->    
             <fieldset class="page two">
-                <legend>skills</legend>
+                <legend>Skills</legend>
                 <div class="totalAreaContainer">
                     <div class="areaContainer">
                         <label for="skill1">Skill 1:</label>
@@ -56,23 +56,61 @@
                 </div>
                 <div class="buttonContainer">
                     <input type="button" value="Back" class="submit">
-                    <input type="button" value="add skill" class="addElem" >
-                    <input type="button" value="remove skill" class="removeElem" >
+                    <input type="button" value="Remove" class="removeElem" >
+                    <input type="button" value="Add" class="addElem">
                     <input type="button" value="Next" class="submit">
                 </div>
             </fieldset>
 
             <!-- Research Background -->
             <fieldset class="page three">
-                <legend>research background</legend>
-                <input type="button" value="Next" class="submit">
-                <input type="button" value="Back" class="submit">
+                <legend>Research Background</legend>
+                <div class="totalAreaContainer">
+                    <div class="areaContainer">
+                        <label for="rb1">Research 1: </label>
+                        <textarea id="rb1" name="researchBg_1" class="area" placeholder="If you don't have any leave this box empty and press next button!"> </textarea>
+                    </div>
+                </div>
+                <div class="buttonContainer">
+                    <input type="button" value="Back" class="submit">
+                    <input type="button" value="Remove" class="removeElem" >
+                    <input type="button" value="Add" class="addElem">
+                    <input type="button" value="Next" class="submit">
+                </div>
+            </fieldset>
+            
+            <!-- Executive Background -->
+            <fieldset class="page four">
+                <legend>Executive Background</legend>
+                <div class="totalAreaContainer">
+                    <div class="areaContainer">
+                        <label for="eb1">Executive 1:</label>
+                        <textarea id="eb1" name="executiveBg_1" class="area" placeholder="If you don't have any leave this box empty and press next button!"> </textarea>
+                    </div>
+                </div>
+                <div class="buttonContainer">
+                    <input type="button" value="Back" class="submit">
+                    <input type="button" value="Remove" class="removeElem" >
+                    <input type="button" value="Add" class="addElem">
+                    <input type="button" value="Next" class="submit">
+                </div>
             </fieldset>
 
             <!-- Final Page -->
-            <fieldset class="page four">
-                <legend>1404</legend>
-                <input type="button" value="Submit" class="submit">
+            <fieldset class="page five">
+                <legend>Activities in 1404</legend>
+                <div class="totalAreaContainer">
+                    <div class="areaContainer">
+                        <label for="act1">Activity 1:</label>
+                        <textarea id="act1" name="activity_1" class="area" placeholder="If you don't have any leave this box empty and press next button!"> </textarea>
+                    </div>
+                </div>
+                    <div class="buttonContainer">
+                        <input type="button" value="Back" class="submit">
+                        <input type="button" value="Remove" class="removeElem" >
+                        <input type="button" value="Add" class="addElem">
+                        <input type="submit" value="submit" class="submit">
+                   </div>
             </fieldset>
         </form>
     </body>

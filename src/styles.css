@@ -147,7 +147,7 @@ input[type=text]{
     font-size: 1rem;
 }
 
-input[type=button]{
+input[type=button]:hover, input[type=submit]:hover{
     width: 20%;
     min-height: 5%;
     background-color: #423f32;
@@ -161,7 +161,21 @@ input[type=button]{
     text-align: center;
 }
 
-input[type=button]:hover{
+input[type=submit], input[type=button]{
+	width: 20%;
+    min-height: 5%;
+    background-color: #eae0c8;
+    border: #423f32 .1rem solid;
+    color: #423f32;
+    border-radius: .2rem;
+    font-size: 0.75rem;
+    font-family: reborn;
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+}
+
+input:hover{
     cursor: pointer;
 }
 
@@ -222,7 +236,7 @@ textarea{
     color: #423f32;
 }
 
-.two, .three, .four{
+.two, .three, .four, .five{
     opacity: 0;
     z-index: 0;
 } 

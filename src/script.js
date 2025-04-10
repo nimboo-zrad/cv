@@ -1,61 +1,94 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector(".form");
-    const [one, two, three, four] = document.querySelectorAll('.page');
-    const [submitOne, submitTwoBack, submitTwoNext, submitThreeBack, submitThreeNext, submitFinal] = document.querySelectorAll(".submit");
-    const addElem = document.querySelector(".addElem");
-    const removeElem = document.querySelector(".removeElem");
-    const totalAreaContainer = document.querySelector(".totalAreaContainer");
+    const [one, two, three, four, five] = document.querySelectorAll('.page');
+    const [submitOne, submitTwoBack, submitTwoNext, submitThreeBack, submitThreeNext, submitFourBack, submitFourNext, submitFiveBack, submitFinal] = document.querySelectorAll(".submit");
+    const addel = document.querySelectorAll(".addElem");
+    const remel= document.querySelectorAll(".removeElem");
+    const tac = document.querySelectorAll(".totalAreaContainer");
     
-    submitOne.addEventListener("click", ()=>{
-        if(form.checkValidity()){
-            one.style.opacity = 0;
-            one.style.zIndex = 0;
-            two.style.opacity = 1;
-            two.style.zIndex = 999;
-        } else console.log(form.reportValidity());
-    });
+    let vars = {
+    	var0: 2,
+        var1: 2,
+        var2: 2,
+        var3: 2,
+    }
     
-    let start = 2;
+  let word = "";
+    
+  addel.forEach((elem, index)=> {
+  	elem.addEventListener("click", ()=>{
+  	    if(index === 0) word = "Skill";
+          else if(index === 1) word = "Research";
+          else if(index === 2) word = "Executive";
+          else word = "Activity";
+  	     const areaContainer = document.createElement("div");
+           areaContainer.className = "areaContainer";
+        
+           const label = document.createElement("label");
+           label.for = word + vars["var" + index] ;
+           label.innerText = word + " " + vars["var" + index] + " :";
+        
+           const textarea = document.createElement("textarea");
+           textarea.id = word + vars["var" + index] ;
+           textarea.name = word + "_" + vars["var" + index] ;
+           textarea.className = "area";
+        
+           areaContainer.appendChild(label);
+           areaContainer.appendChild(textarea);
+        
+           tac[index].appendChild(areaContainer);
+           vars["var" + index]++
+      });
+  });
   
-    addElem.addEventListener("click", ()=>{
-        const areaContainer = document.createElement("div");
-        areaContainer.className = "areaContainer";
-        
-        const label = document.createElement("label");
-        label.for = "skill" + start;
-        label.innerText = "Skill " + start + " :";
-        
-        const textarea = document.createElement("textarea");
-        textarea.id = "skill" + start;
-        textarea.name = "skill_" + start;
-        textarea.className = "area";
-        
-        areaContainer.appendChild(label);
-        areaContainer.appendChild(textarea);
-        
-        totalAreaContainer.appendChild(areaContainer);
-        start++;
-    });
-    
-    removeElem.addEventListener("click", ()=>{
-        if(start > 2){
-            totalAreaContainer.removeChild(totalAreaContainer.lastChild);
-            start--
-        }
+  remel.forEach((elem, index) =>{
+  	elem.addEventListener("click", ()=>{
+          if(vars["var" + index] > 2){
+          	tac[index].removeChild(tac[index].lastChild);
+              vars["var" + index] --;
+          }
+      });
+  });
+  
+  const transitionPage = (hide, show) =>{
+    	hide.style.opacity = 0;
+        hide.style.zIndex = 0;
+        show.style.opacity = 1;
+        show.style.zIndex = 999;
+  };
+  
+  submitOne.addEventListener("click", ()=>{
+        if(form.checkValidity()){
+            transitionPage(one, two);
+        } else console.log(form.reportValidity());
     });
 
     submitTwoNext.addEventListener("click", ()=>{
-        two.style.opacity = 0;
-        two.style.zIndex = 0;
-        three.style.opacity = 1;
-        three.style.zIndex = 0;
+        transitionPage(two, three);
     });
 
     submitTwoBack.addEventListener("click", ()=>{
-        two.style.opacity = 0;
-        two.style.zIndex = 0;
-        one.style.opacity = 1;
-        one.style.zIndex = 999;
+    	transitionPage(two, one);
+    });
+    
+    submitThreeNext.addEventListener("click", ()=>{
+        transitionPage(three, four);
+    });
+
+    submitThreeBack.addEventListener("click", ()=>{
+         transitionPage(three, two);
+    });
+    
+    submitFourNext.addEventListener("click", ()=>{
+        transitionPage(four, five);
+    });
+
+    submitFourBack.addEventListener("click", ()=>{
+        transitionPage(four, three);
+    });
+
+    submitFiveBack.addEventListener("click", ()=>{
+         transitionPage(five, four);
     });
 });
 
