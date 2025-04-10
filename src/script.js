@@ -91,5 +91,3 @@ document.addEventListener("DOMContentLoaded", () => {
          transitionPage(five, four);
     });
 });
-
-

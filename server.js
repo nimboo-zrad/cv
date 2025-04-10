@@ -21,13 +21,7 @@ app.post('/submit', (req, res)=>{
     const data = req.body;
     if(data == undefined) res.status(403).send('the body is undefined!');
     const {firstName, lastName, age, stuCode, natCode} = data;
-    const newData = {
-        fullName: `${firstName} ${lastName}`,
-        age: age,
-        studentCode: stuCode,
-        nationalCode: natCode
-    }
-    fs.writeFile(`./users/${firstName} ${lastName}.json`, JSON.stringify(newData, null, 2), (err)=>{
+    fs.writeFile(`./users/${firstName} ${lastName}.json`, JSON.stringify(data, null, 2), (err)=>{
         if(err) console.error("there has been a problem: ", err.message);
         else console.log('writed successfully!')
     });
