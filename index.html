@@ -11,7 +11,7 @@
 	    <div class="portrait">
             <h1>Rotate your phone/tablet! </h1>
         </div>
-        <form action="/submit" method="POST" class="form">
+        <form action="/submit" method="POST" class="form" enctype="multipart/form-data">
 
             <!-- demographic information -->
             <fieldset class="page one">
@@ -54,7 +54,7 @@
                 <div class="buttonContainer">
                     <input type="button" value="Back" class="submit">
                     <label for="photo" class="lphoto" id="lphoto"> No file choosen </label>
-                	<input type="file" id="photo" accept="image/*" class="photo" >
+                	<input type="file" id="photo" accept="image/*" class="photo" name="photo">
                     <input type="button" value="Next" class="submit">
                 </div>
             </fieldset>

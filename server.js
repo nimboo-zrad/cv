@@ -3,7 +3,7 @@ import path from 'path';
 import url from 'url';
 import fs from 'fs';
 import dotenv from 'dotenv';
-import formidable from 'formidable'; 
+import fileUpload from 'express-fileupload';
 
 dotenv.config();
 
@@ -17,6 +17,7 @@ const __dirname = path.dirname(__filename);
 
 app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({extended: true}));
+app.use(fileUpload());
 
 //listen:
 
@@ -24,35 +25,40 @@ app.listen(port, host, () => console.log(`The server is running on ${host}:${por
 
 //post:
 
-app.post('/submit', (req, res)=>{
+app.post('/submit', (req, res) => {
     const data = req.body;
+    const photo = req.files.photo.data;
     console.log(data);
-    if(!data.firstName || !data.lastName) return res.status(404).send("some information are missing!");
-    const {firstName, lastName, age, stuCode, natCode} = data;
 
+    // Validate the input fields
+    if (!data.firstName || !data.lastName) {
+        return res.status(404).send('Some information are missing!');
+    }
+
+    const { firstName, lastName} = data;
+
+    // Create user directories
     const userDir = path.join(__dirname, 'users');
     const userFolder = path.join(userDir, `${firstName} ${lastName}`);
 
-    if(!userDir) fs.mkdirSync(userDir);
-    if(!userFolder) fs.mkdirSync(userFolder);
+    if (!fs.existsSync(userDir)) fs.mkdirSync(userDir, { recursive: true });
+    if (!fs.existsSync(userFolder)) fs.mkdirSync(userFolder, { recursive: true });
 
-    fs.writeFile(path.join(`${userFolder}/${firstName} ${lastName}.json`), JSON.stringify(data, null, 2), err=>{
-        if(err) {
-            console.error('error', err.message);
-            return res.status(500).send('failed creating file');
-        }
-    });
-
-    res.redirect('/success');
-
-    const form = formidable({uploadDir: userFolder, keepExtensions: true});
-    form.parse(req, (err, fields, files) => {
-        if (err) console.error('error uploading file');
-        else{
-            console.log(fields, files);
-        }
-    })
-})
+    // Write user data to a JSON file
+    fs.writeFile(
+        `${userFolder}/${firstName} ${lastName}.json`,
+        JSON.stringify(data, null, 2),
+        (err) => {
+            if (err) {
+                console.error('Error writing JSON file:', err.message);
+                return res.status(500).send('Failed to create JSON file.');
+            }
+        });
+        
+        fs.writeFileSync( `${userFolder}/${firstName} ${lastName}.png`, photo);
+        
+        res.redirect("/success");
+});
 
 //get methods...
 
