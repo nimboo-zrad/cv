@@ -85,10 +85,26 @@ const userShow = (req, res, next) => {
             return res.status(500).send("failed reading file!");
         }
             const parsedData = JSON.parse(data);
-            res.status(201).send(parsedData);
+            res.write(data);
             console.log('file read successfully!');
     });
     next();
+}
+
+const userPhoto = (req, res, next) => {
+    const image = path.join(__dirname, 'users', req.params.fullName, `${req.params.fullName}.png`);
+    const imageBuffer = fs.readFile(image, (err)=>{
+        if(err) {
+            console.error('There has been an error reading image buffer: ', err.message);
+            res.status(500).send('failed to read image buffer');
+        }
+        console.log('image read successfully!');
+    });
+
+    console.log(imageBuffer);
+
+    res.setHeader('Content-Type', 'image/png');
+    res.send(imageBuffer);
 }
 
 //post:
@@ -99,7 +115,7 @@ app.post('/submit', formProcess , photoProcess, (req, res) => {
 
 //get
 
-app.get('/users/:fullName', userShow);
+app.get('/users/:fullName', userShow, userPhoto);
 
 app.get('/success', (req, res)=>{
 	res.sendFile(path.join(__dirname, "src", "redirect.html"));
