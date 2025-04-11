@@ -147,21 +147,13 @@ input[type=text]{
     font-size: 1rem;
 }
 
-input[type=button]:hover, input[type=submit]:hover{
-    width: 20%;
-    min-height: 5%;
+.lphoto:hover, input[type=button]:hover, input[type=submit]:hover{
     background-color: #423f32;
     border: none;
     color: #eae0c8;
-    border-radius: .2rem;
-    font-size: 0.75rem;
-    font-family: reborn;
-    font-weight: bold;
-    margin: 0 auto;
-    text-align: center;
 }
 
-input[type=submit], input[type=button]{
+.lphoto, input[type=submit], input[type=button]{
 	width: 20%;
     min-height: 5%;
     background-color: #eae0c8;
@@ -173,13 +165,22 @@ input[type=submit], input[type=button]{
     font-weight: bold;
     margin: 0 auto;
     text-align: center;
+    vertical-align: middle;
+}
+
+.lphoto{
+	width: 30%;
 }
 
 input:hover{
     cursor: pointer;
 }
 
-input::placeholder{
+input[type=file]{
+	display:none;
+}
+
+input::placeholder, textarea::placeholder{
     font-family: 'roboto';
     font-size: 0.75rem; 
     color: #eae0c8;
@@ -234,9 +235,23 @@ textarea{
     padding-left: 2%;
     background-color: #b59a6f;
     color: #423f32;
+    font-family: roboto;
+    font-size: 1rem;
 }
 
-.two, .three, .four, .five{
+.two, .three, .four, .five, .six{
     opacity: 0;
     z-index: 0;
 } 
+
+.photoContainer{
+	width: 100%;
+	height: 95%;
+	overflow: hidden;
+}
+
+img{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}

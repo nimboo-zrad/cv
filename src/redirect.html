@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
-    <script>
-        setTimeout(()=>{
-            window.location.href = '/';
-        }, 3000);
-    </script>
+ 
     <style>
     	*{
     	    margin: 0;
@@ -18,7 +14,7 @@
         
     	@font-face{
     	    font-family: 'reborn';
-            src: url('./fonts/burney.otf');
+            src: url('/src/fonts/burney.otf');
             font-weight: normal;
             font-style: normal;
         }
@@ -40,6 +36,11 @@
             text-align: center;
         }
     </style>
+       <script>
+        setTimeout(()=>{
+            window.location.href = '/';
+        }, 3000);
+    </script>
 </head>
 <body>
     <h1> your request has been processed successfully! </h1>

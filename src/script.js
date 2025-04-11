@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector(".form");
-    const [one, two, three, four, five] = document.querySelectorAll('.page');
-    const [submitOne, submitTwoBack, submitTwoNext, submitThreeBack, submitThreeNext, submitFourBack, submitFourNext, submitFiveBack, submitFinal] = document.querySelectorAll(".submit");
+    const [one, two, three, four, five, six] = document.querySelectorAll('.page');
+    const [submitOne, submitTwoBack, submitTwoNext, submitThreeBack, submitThreeNext, submitFourBack, submitFourNext, submitFiveBack, submitFiveNext, submitSixBack, submitFinal] = document.querySelectorAll(".submit");
     const addel = document.querySelectorAll(".addElem");
     const remel= document.querySelectorAll(".removeElem");
     const tac = document.querySelectorAll(".totalAreaContainer");
+    const photoInput = document.querySelector(".photo");
+    const photoPrev = document.querySelector(".photoInput");
     
     let vars = {
     	var0: 2,
@@ -86,8 +88,28 @@ document.addEventListener("DOMContentLoaded", () => {
     submitFourBack.addEventListener("click", ()=>{
         transitionPage(four, three);
     });
+    
+    submitFiveNext.addEventListener("click", ()=>{
+    	transitionPage(five, six);
+   });
 
     submitFiveBack.addEventListener("click", ()=>{
          transitionPage(five, four);
+    });
+    
+    submitSixBack.addEventListener("click", ()=>{
+         transitionPage(six, five);
+    });
+    
+    photoInput.addEventListener("change", (event)=>{
+    	const file = event.target.files[0];
+        
+        if(file){
+        	const reader = new FileReader();
+        	reader.onload = (e)=>{
+        	photoPrev.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+        }
     });
 });
