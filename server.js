@@ -23,64 +23,86 @@ app.use(fileUpload());
 
 app.listen(port, host, () => console.log(`The server is running on ${host}:${port}`));
 
-//post:
+//middlewares:
 
-app.post('/submit', (req, res) => {
+const formProcess = (req, res, next) => {
     const data = req.body;
-    const photo = req.files.photo.data;
-    console.log(data);
-
-    // Validate the input fields
+    const {firstName, lastName} = data;
+    
     if (!data.firstName || !data.lastName) {
         return res.status(404).send('Some information are missing!');
     }
-
-    const { firstName, lastName} = data;
-
-    // Create user directories
+    
+    const fullName = `${firstName} ${lastName}`;
     const userDir = path.join(__dirname, 'users');
-    const userFolder = path.join(userDir, `${firstName} ${lastName}`);
+    const userFolder = path.join(userDir, fullName);
+
+    req.sharedData = {userFolder: userFolder, fullName: fullName};
 
     if (!fs.existsSync(userDir)) fs.mkdirSync(userDir, { recursive: true });
     if (!fs.existsSync(userFolder)) fs.mkdirSync(userFolder, { recursive: true });
 
-    // Write user data to a JSON file
     fs.writeFile(
-        `${userFolder}/${firstName} ${lastName}.json`,
+        `${userFolder}/${fullName}.json`,
         JSON.stringify(data, null, 2),
         (err) => {
             if (err) {
-                console.error('Error writing JSON file:', err.message);
-                return res.status(500).send('Failed to create JSON file.');
+                console.error('There has been an error writing JSON files!: ', err.message);
+                return res.status(500).send('Failed to write JSON file.');
             }
         });
-        
-        fs.writeFileSync( `${userFolder}/${firstName} ${lastName}.png`, photo);
-        
-        res.redirect("/success");
-});
+    next();
+};
 
-//get methods...
+const photoProcess = (req, res, next) => {
+    const photo = req.files.photo.data;
+    const {fullName, userFolder} = req.sharedData;
 
-app.get('/success', (req, res)=>{
-	res.sendFile(path.join(__dirname, "src", "redirect.html"));
-});
+    fs.writeFile(
+        `${userFolder}/${fullName}.png`,
+        photo,
+        (err) => {
+            if(err){
+                console.error("There has been an error writing binary data of the photo to the file!: ", err.message);
+                return res.status(500).send("Failed to write binary data of photo to the file!");
+            }
+        }
+    );
+    next();
+};
 
-app.get('/users/:fullName', (req, res)=>{
+const userShow = (req, res, next) => {
     const fullName = req.params.fullName;
-    const userFile = path.join(__dirname, "users", `${fullName}.json`);
+    const userFile = path.join(__dirname, "users", `${fullName}`, `${fullName}.json`);
     
+    console.log(fullName, userFile);
+
     if(!fs.existsSync(userFile)) return res.status(404).send("user not found!");
     
     fs.readFile(userFile, 'utf8', (err, data)=>{
         if(err) {
-        	console.error('There has been an error: ', err.message);
+        	console.error('There has been an error reading file\'s data: ', err.message);
             return res.status(500).send("failed reading file!");
         }
             const parsedData = JSON.parse(data);
             res.status(201).send(parsedData);
             console.log('file read successfully!');
     });
+    next();
+}
+
+//post:
+
+app.post('/submit', formProcess , photoProcess, (req, res) => {
+    res.redirect("/success");
+});
+
+//get
+
+app.get('/users/:fullName', userShow);
+
+app.get('/success', (req, res)=>{
+	res.sendFile(path.join(__dirname, "src", "redirect.html"));
 });
 
 app.get('/', (req, res)=>{
