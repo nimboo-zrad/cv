@@ -17,7 +17,12 @@ app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({extended: true}));
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, path.join(__dirname, `${req.body.firstName} ${req.body.lastName}`)),
+    destination: (req, file, cb) => {
+        const userDir = path.join(__dirname, "users", `${req.body.firstName} ${req.body.lastName}`);
+        if(!fs.existsSync(userDir)) fs.mkdirSync(userDir, {recursive: true});
+
+        cb(null, userDir);
+    },
     filename: (req, file, cb) => cb(null, `${req.body.firstName} ${req.body.lastName}`)
 });
 
@@ -32,20 +37,12 @@ app.post('/submit', upload.single('file'), (req, res)=>{
     
     if(data == undefined) return res.status(404).send("some information are missing!");
     const {firstName, lastName, age, stuCode, natCode} = data;
-    
-    const userDir = path.join(__dirname, "users");
-    if(!fs.existsSync(userDir)) fs.mkdirSync(userDir, {recursive: true});
-    
-    fs.mkdirSync(path.join(userDir, `${firstName} ${lastName}`));
-    
-    fs.writeFile(path.join(userDir, `${firstName} ${lastName}`, `${firstName} ${lastName}.json`), JSON.stringify(data, null, 2), (err)=>{
-        if(err){
-        	console.error("there has been a problem: ", err.message);
-            return res.status(500).send("failed to save user data!");
-        } 
-        console.log('writed successfully!');
-        res.redirect("/success");
-    });
+
+    const userDir = path.join(__dirname, 'users');
+    const userFolder = path.join(userDir, `${firstName} ${lastName}`);
+
+    fs.writeFileSync(path.join(userFolder, `${firstName} ${lastName}`), JSON.stringify(data, null, 2));
+    res.redirect('/success');
 
     if(!req.file) console.error("there is no such thing");
     else console.log(req.file);
