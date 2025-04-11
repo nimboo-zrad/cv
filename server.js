@@ -3,7 +3,7 @@ import path from 'path';
 import url from 'url';
 import fs from 'fs';
 import dotenv from 'dotenv';
-import multer from 'multer';
+import formidable from 'formidable'; 
 
 dotenv.config();
 
@@ -13,40 +13,49 @@ const host = process.env.HOST || '127.0.0.1';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+//middlewares:
+
 app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({extended: true}));
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const userDir = path.join(__dirname, "users", `${req.body.firstName} ${req.body.lastName}`);
-        if(!fs.existsSync(userDir)) fs.mkdirSync(userDir, {recursive: true});
-
-        cb(null, userDir);
-    },
-    filename: (req, file, cb) => cb(null, `${req.body.firstName} ${req.body.lastName}`)
-});
-
-const upload = multer({ storage });
+//listen:
 
 app.listen(port, host, () => console.log(`The server is running on ${host}:${port}`));
 
-//post methods
+//post:
 
-app.post('/submit', upload.single('file'), (req, res)=>{
+app.post('/submit', (req, res)=>{
     const data = req.body;
-    
-    if(data == undefined) return res.status(404).send("some information are missing!");
+    console.log(data);
+    if(!data.firstName || !data.lastName) return res.status(404).send("some information are missing!");
     const {firstName, lastName, age, stuCode, natCode} = data;
 
     const userDir = path.join(__dirname, 'users');
     const userFolder = path.join(userDir, `${firstName} ${lastName}`);
 
-    fs.writeFileSync(path.join(userFolder, `${firstName} ${lastName}`), JSON.stringify(data, null, 2));
+    if(!userDir) fs.mkdirSync(userDir);
+    if(!userFolder) fs.mkdirSync(userFolder);
+
+    fs.writeFile(path.join(`${userFolder}/${firstName} ${lastName}.json`), JSON.stringify(data, null, 2), err=>{
+        if(err) {
+            console.error('error', err.message);
+            return res.status(500).send('failed creating file');
+        }
+    });
+
     res.redirect('/success');
+
+    const form = formidable({uploadDir: userFolder, keepExtensions: true});
+    form.parse(req, (err, fields, files) => {
+        if (err) console.error('error uploading file');
+        else{
+            console.log(fields, files);
+        }
+    })
 
     if(!req.file) console.error("there is no such thing");
     else console.log(req.file);
-});
+})
 
 //get methods...
 
