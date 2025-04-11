@@ -52,9 +52,6 @@ app.post('/submit', (req, res)=>{
             console.log(fields, files);
         }
     })
-
-    if(!req.file) console.error("there is no such thing");
-    else console.log(req.file);
 })
 
 //get methods...
