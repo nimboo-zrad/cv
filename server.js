@@ -16,11 +16,18 @@ const __dirname = path.dirname(__filename);
 app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({extended: true}));
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, path.join(__dirname, `${req.body.firstName} ${req.body.lastName}`)),
+    filename: (req, file, cb) => cb(null, `${req.body.firstName} ${req.body.lastName}`)
+});
+
+const upload = multer({ storage });
+
 app.listen(port, host, () => console.log(`The server is running on ${host}:${port}`));
 
 //post methods
 
-app.post('/submit', (req, res)=>{
+app.post('/submit', upload.single('file'), (req, res)=>{
     const data = req.body;
     
     if(data == undefined) return res.status(404).send("some information are missing!");
@@ -39,15 +46,9 @@ app.post('/submit', (req, res)=>{
         console.log('writed successfully!');
         res.redirect("/success");
     });
-    
-    const storage = multer.diskStorage({
-    	destination: (req, file, cb)=> {
-    	    cb(null, path.join(userDir, `${firstName} ${lastName}`));
-        },
-        filename: (req, file, cb) => {
-        	cb(null, `${firstName} ${lastName}`);
-        }
-    });
+
+    if(!req.file) console.error("there is no such thing");
+    else console.log(req.file);
 });
 
 //get methods...
