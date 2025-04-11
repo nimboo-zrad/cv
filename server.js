@@ -37,45 +37,36 @@ const formProcess = (req, res, next) => {
     const userDir = path.join(__dirname, 'users');
     const userFolder = path.join(userDir, fullName);
 
-    req.sharedData = {userFolder: userFolder, fullName: fullName};
+    req.sharedData = {userFolder: userFolder, fullName: fullName, data: data};
 
     if (!fs.existsSync(userDir)) fs.mkdirSync(userDir, { recursive: true });
     if (!fs.existsSync(userFolder)) fs.mkdirSync(userFolder, { recursive: true });
-
-    fs.writeFile(
-        `${userFolder}/${fullName}.json`,
-        JSON.stringify(data, null, 2),
-        (err) => {
-            if (err) {
-                console.error('There has been an error writing JSON files!: ', err.message);
-                return res.status(500).send('Failed to write JSON file.');
-            }
-        });
     next();
 };
 
 const photoProcess = (req, res, next) => {
-    const photo = req.files.photo.data;
-    const {fullName, userFolder} = req.sharedData;
-
-    fs.writeFile(
-        `${userFolder}/${fullName}.png`,
-        photo,
+    const photo = req.files.photo.data.toString('base64');
+    const {fullName, userFolder, data} = req.sharedData;
+    data.photo = photo;
+    const newData = JSON.stringify(data, null, 2);
+    
+   fs.writeFile(
+        `${userFolder}/${fullName}.json`,
+        newData,
         (err) => {
             if(err){
                 console.error("There has been an error writing binary data of the photo to the file!: ", err.message);
                 return res.status(500).send("Failed to write binary data of photo to the file!");
             }
         }
-    );
+    ); 
+    
     next();
 };
 
 const userShow = (req, res, next) => {
     const fullName = req.params.fullName;
     const userFile = path.join(__dirname, "users", `${fullName}`, `${fullName}.json`);
-    
-    console.log(fullName, userFile);
 
     if(!fs.existsSync(userFile)) return res.status(404).send("user not found!");
     
@@ -85,26 +76,26 @@ const userShow = (req, res, next) => {
             return res.status(500).send("failed reading file!");
         }
             const parsedData = JSON.parse(data);
-            res.write(data);
+            res.json(parsedData);
             console.log('file read successfully!');
     });
-    next();
 }
 
 const userPhoto = (req, res, next) => {
-    const image = path.join(__dirname, 'users', req.params.fullName, `${req.params.fullName}.png`);
-    const imageBuffer = fs.readFile(image, (err)=>{
+    const image = path.join(__dirname, 'users', req.params.fullName, `${req.params.fullName}.json`);
+    fs.readFile(image, (err, data)=>{
         if(err) {
             console.error('There has been an error reading image buffer: ', err.message);
-            res.status(500).send('failed to read image buffer');
+            return res.status(500).send('failed to read image buffer');
         }
+        // console.log(data);
+        const jsoned = JSON.parse(data)
+        res.setHeader('Content-Type', 'image/png');
+       //  res.send(jsoned.photo);
+       const final = Buffer.from(jsoned.photo, 'base64');
+       res.send(final);
         console.log('image read successfully!');
     });
-
-    console.log(imageBuffer);
-
-    res.setHeader('Content-Type', 'image/png');
-    res.send(imageBuffer);
 }
 
 //post:
@@ -115,7 +106,9 @@ app.post('/submit', formProcess , photoProcess, (req, res) => {
 
 //get
 
-app.get('/users/:fullName', userShow, userPhoto);
+app.get('/users/:fullName', userShow);
+
+app.get('/photo/:fullName', userPhoto);
 
 app.get('/success', (req, res)=>{
 	res.sendFile(path.join(__dirname, "src", "redirect.html"));
