@@ -1,19 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
-}
-
-@font-face{
-    font-family:'roboto';
-    src: url('../fonts/Roboto-ExtraLight.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body{
-    background-color: beige;
     width: 100vw;
     height: 100vh;
 }
@@ -23,11 +8,77 @@ header{
     height: 10vh;
     top: 5%;
     left: 5%;
-    background-color: #432f23;
-    border-radius: 99px;
+    background-color: beige;
+    color: #423f32;
+    border-radius: .5rem;
     position: fixed;
     box-shadow: 0 4px 6px rgba(0,0,0,.2);
     z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.signIn, .logo{
+    font-family: reborn;
+    height: 80%;
+    color: beige;
+    border-radius: .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.logo{
+    background: linear-gradient(to right, beige, #423f32);
+    width: 20%;
+}
+
+.signIn{
+    background-color: #423f32;
+    width: 15%;
+}
+
+.logoImage{
+    width:33%;
+    height: 100%;
+}
+
+.logoText{
+    width:66%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1% 0;
+}
+
+.logoText p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+}
+
+.itemsContainer{
+    width: 50%;
+    height: 80%;
+    display: flex;
+}
+
+.about, .users, .update{
+    border-right: #423f32 solid .1rem;
+    width: 33.33%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.about{
+    border: none;
 }
 
 .image{
@@ -48,13 +99,25 @@ header{
     z-index: 50;
     background: linear-gradient(to bottom, transparent, black);
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5% 5%;
 }
 
 .text{
     color: white;
     font-size: 2rem;
-    font-family: roboto;
+    font-family: 'roboto';
     width: 40%;
-    height: 80%;
+    height: auto;
+
+}
+
+.title{
+    font-size: 4rem;
+}
+
+.body{
+    margin-left: 2.5%;
 }

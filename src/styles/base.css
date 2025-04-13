@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+
+@font-face{
+    font-family: 'reborn';
+    src: url('/src/fonts/burney.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'roboto';
+    src: url('/src/fonts/Roboto-Thin.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media (max-widht: 575px){
+    *{
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px){
+    *{
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    *{
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px){
+    *{
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1200px){
+    *{
+        font-size: 20px;
+    }
+}
+
+@media (orientation: landscape){
+    body{
+        background-image: url('./committee.png');
+    }
+    
+    .portrait{
+        display: none;
+    }
+}
+
+@media (orientation: portrait){
+    .form{
+        display: none;
+    }
+    
+    .portrait{
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: beige;
+    }
+    
+    h1{
+        font-family: 'reborn';
+        font-size: 5vw;
+    }
+}
