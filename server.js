@@ -118,9 +118,13 @@ app.post('/submit', formProcess , photoProcess, (req, res) => {
 app.get('/users/:fullName', userShow, userPhoto);
 
 app.get('/success', (req, res)=>{
-	res.sendFile(path.join(__dirname, "src", "redirect.html"));
+	res.sendFile(path.join(__dirname, "/src/pages/", "redirect.html"));
 });
 
 app.get('/', (req, res)=>{
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, '/src/pages/', 'home.html'));
 });

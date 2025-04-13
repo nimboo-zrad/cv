@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+@font-face{
+    font-family:'roboto';
+    src: url('../fonts/Roboto-ExtraLight.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-color: beige;
+    width: 100vw;
+    height: 100vh;
+}
+
+header{
+    width: 90%;
+    height: 10vh;
+    top: 5%;
+    left: 5%;
+    background-color: #432f23;
+    border-radius: 99px;
+    position: fixed;
+    box-shadow: 0 4px 6px rgba(0,0,0,.2);
+    z-index: 100;
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.textWrapper{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background: linear-gradient(to bottom, transparent, black);
+    display: flex;
+    align-items: flex-end;
+}
+
+.text{
+    color: white;
+    font-size: 2rem;
+    font-family: roboto;
+    width: 40%;
+    height: 80%;
+}
