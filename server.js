@@ -58,6 +58,7 @@ const photoProcess = (req, res, next) => {
                 console.error("There has been an error writing binary data of the photo to the file!: ", err.message);
                 return res.status(500).send("Failed to write binary data of photo to the file!");
             }
+            console.log('data stored successfully!');
         }
     ); 
     
@@ -101,23 +102,23 @@ const userPhoto = (req, res, next) => {
 //post:
 
 app.post('/submit', formProcess , photoProcess, (req, res) => {
-    res.redirect("/success");
+    res.redirect('/success');
 });
 
 //get
 
-app.get('/users/:fullName', userShow);
-
-app.get('/photo/:fullName', userPhoto);
+app.get('/signin', (req, res) => {
+    res.sendFile(path.join(__dirname, '/src/pages', 'signIn.html'));
+})
 
 app.get('/success', (req, res)=>{
 	res.sendFile(path.join(__dirname, "/src/pages/", "redirect.html"));
 });
 
-app.get('/', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+app.get('/update', (req, res) => {
+    res.sendFile(path.join(__dirname, '/src/pages', 'update.html'));
+})
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/src/pages/', 'home.html'));
 });

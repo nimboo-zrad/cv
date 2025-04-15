@@ -49,33 +49,3 @@
         font-size: 20px;
     }
 }
-
-@media (orientation: landscape){
-    body{
-        background-image: url('./committee.png');
-    }
-    
-    .portrait{
-        display: none;
-    }
-}
-
-@media (orientation: portrait){
-    .form{
-        display: none;
-    }
-    
-    .portrait{
-        display: flex;
-        width: 100vw;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        background-color: beige;
-    }
-    
-    h1{
-        font-family: 'reborn';
-        font-size: 5vw;
-    }
-}

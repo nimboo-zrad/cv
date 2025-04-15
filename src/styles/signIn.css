@@ -1,3 +1,33 @@
+@media (orientation: landscape){
+    .portrait{
+        display: none;
+    }
+   
+    body{
+        background-image: url('/src/pics/committee.png');
+    }
+}
+
+@media (orientation: portrait){
+    .form{
+        display: none;
+    }
+    
+    .portrait{
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: beige;
+    }
+    
+    h1{
+        font-family: 'reborn';
+        font-size: 5vw;
+    }
+}
+
 *{
     margin: 0;
     padding: 0;
