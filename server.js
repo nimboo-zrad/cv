@@ -25,45 +25,6 @@ app.listen(port, host, () => console.log(`The server is running on ${host}:${por
 
 //middlewares:
 
-const formProcess = (req, res, next) => {
-    const data = req.body;
-    const {firstName, lastName} = data;
-    
-    if (!data.firstName || !data.lastName) {
-        return res.status(404).send('Some information are missing!');
-    }
-    
-    const fullName = `${firstName} ${lastName}`;
-    const userDir = path.join(__dirname, 'users');
-    const userFolder = path.join(userDir, fullName);
-
-    req.sharedData = {userFolder: userFolder, fullName: fullName, data: data};
-
-    if (!fs.existsSync(userDir)) fs.mkdirSync(userDir, { recursive: true });
-    if (!fs.existsSync(userFolder)) fs.mkdirSync(userFolder, { recursive: true });
-    next();
-};
-
-const photoProcess = (req, res, next) => {
-    const photo = req.files.photo.data.toString('base64');
-    const {fullName, userFolder, data} = req.sharedData;
-    data.photo = photo;
-    const newData = JSON.stringify(data, null, 2);
-    
-   fs.writeFile(
-        `${userFolder}/${fullName}.json`,
-        newData,
-        (err) => {
-            if(err){
-                console.error("There has been an error writing binary data of the photo to the file!: ", err.message);
-                return res.status(500).send("Failed to write binary data of photo to the file!");
-            }
-            console.log('data stored successfully!');
-        }
-    ); 
-    
-    next();
-};
 
 const userShow = (req, res, next) => {
     const fullName = req.params.fullName;
@@ -99,17 +60,83 @@ const userPhoto = (req, res, next) => {
     });
 }
 
+const formProcess = (req, res, next) => {
+    const data = req.body;
+    const {firstName, lastName} = data;
+    
+    if (!data.firstName || !data.lastName) {
+        return res.status(404).send('Some information are missing!');
+    }
+    
+    const fullName = `${firstName} ${lastName}`;
+    const userDir = path.join(__dirname, 'users');
+    const userFolder = path.join(userDir, fullName);
+
+    req.sharedData = {userFolder: userFolder, fullName: fullName, data: data};
+
+    if (!fs.existsSync(userDir)) fs.mkdirSync(userDir, { recursive: true });
+    if (!fs.existsSync(userFolder)) fs.mkdirSync(userFolder, { recursive: true });
+    next();
+};
+
+const photoProcess = (req, res, next) => {
+    const photo = req.files.photo.data.toString('base64');
+    const {fullName, userFolder, data} = req.sharedData;
+    data.photo = photo;
+    const newData = JSON.stringify(data, null, 2);
+    
+   fs.writeFile(
+        `${userFolder}/${fullName}.json`,
+        newData,
+        (err) => {
+            if(err){
+                console.error("There has been an error writing binary data of the photo to the file!: ", err.message);
+                return res.status(500).send("Failed to write binary data of photo to the file!");
+            }
+            console.log('data stored successfully!');
+            next();
+        }
+    ); 
+    
+};
+
+const login = (req, res, next) => {
+    console.log(req.body);
+
+    const {fullName, password} = req.body;
+    
+    fs.readFile(path.join(__dirname, '/users', `${fullName}.json`), (data, err) => {
+        if (err){
+            console.error("something went wrong with reading users", err.message);
+            return res.send("something went wrong");
+        }
+        const jsoned = JSON.parse(data);
+        if(jsoned.natCode === pass) res.sendFile(path.join(__dirname, '/src/pages', 'users.html'));
+        next();
+    })
+}
+
 //post:
 
 app.post('/submit', formProcess , photoProcess, (req, res) => {
     res.redirect('/success');
 });
 
+app.post('/login', login);
+
 //get
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, '/src/pages/', 'about.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '/src/pages', 'login.html'));
+});
 
 app.get('/signin', (req, res) => {
     res.sendFile(path.join(__dirname, '/src/pages', 'signIn.html'));
-})
+});
 
 app.get('/success', (req, res)=>{
 	res.sendFile(path.join(__dirname, "/src/pages/", "redirect.html"));
@@ -117,7 +144,7 @@ app.get('/success', (req, res)=>{
 
 app.get('/update', (req, res) => {
     res.sendFile(path.join(__dirname, '/src/pages', 'update.html'));
-})
+});
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/src/pages/', 'home.html'));

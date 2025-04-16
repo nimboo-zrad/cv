@@ -1,33 +1,3 @@
-@media (orientation: landscape){
-    .portrait{
-        display: none;
-    }
-   
-    body{
-        background-image: url('/src/pics/committee.png');
-    }
-}
-
-@media (orientation: portrait){
-    .form{
-        display: none;
-    }
-    
-    .portrait{
-        display: flex;
-        width: 100vw;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        background-color: beige;
-    }
-    
-    h1{
-        font-family: 'reborn';
-        font-size: 5vw;
-    }
-}
-
 *{
     margin: 0;
     padding: 0;
@@ -37,6 +7,7 @@
 }
 
 body{
+    background-image: url('/src/pics/committee.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center center;
@@ -49,10 +20,11 @@ body{
 }
 
 form{
-    width: 35vw;
-    height: 85vh;
+    width: 30vw;
+    height: 75vh;
     position: relative;
-    margin-left: 57.5vw;
+    top: 7.5%;
+    margin-left: 62.5vw;
 }
 
 .page{
@@ -61,7 +33,6 @@ form{
     background-color: #eae0c8;
     color: #423f32;
     position: absolute;
-    box-sizing: border-box;
     font-family: reborn;
     border: solid #423f32 .1rem;
     padding: 5% 5%;

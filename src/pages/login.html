@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/src/styles/base.css">
-    <link rel="stylesheet" href="/src/styles/home.css">
-    <script src="/src/scripts/home.js"></script>
+    <link rel="stylesheet" href="/src/styles/login.css">
+    <script src="/src/scripts/login.js"></script>
 </head>
 <body>
+    <div class="portrait">
+        <h1>Rotate your phone/tablet! </h1>
+    </div>
     <header>
         <a href="/" class="logo">
             <img src="/src/pics/committeeLogo.svg" class="logoImage">
@@ -25,13 +28,21 @@
         </div>
         <div class="signIn"><a href="/signin">Sign-In</a></div>
     </header>
+    <form action="/login" method="POST">
+        <fieldset>
+            <legend>Log In: </legend>
+            <div class="inp">
+                <label for="username">Full Name: </label>
+                <input type="text" placeholder="Enter your full name" required id="username" name="fullName">
+            </div>
 
-    <main>
-        <image class="image" src="/src/pics/homePage.png"></image>
-        <div class="textWrapper">
-            <p class="text title">Research Committee</p>
-            <p class="text body">An opportunity to explore the unknowns</p>
-        </div>
-    </main>
+            <div class="inp">
+                <label for="password">Password: </label>
+                <input type="text" placeholder="Enter your password" required id="password" name="password">
+            </div>
+
+            <input type="submit">
+        </fieldset>
+    </form>
 </body>
 </html>
