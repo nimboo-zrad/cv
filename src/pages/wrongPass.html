@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INCORRECT PASSWORD</title>
+ 
+    <style>
+    	*{
+    	    margin: 0;
+            outline: 0;
+            padding: 0;
+        }
+        
+    	@font-face{
+    	    font-family: 'reborn';
+            src: url('/src/fonts/burney.otf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body{
+        	width:100vw;
+            height:100vh;
+        	display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: beige;
+            color: #423f32;
+            flex-direction: column;
+        }
+        
+        h1, h3{
+        	font-family: reborn;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1{
+            color: red;
+        }
+    </style>
+       <script>
+        setTimeout(()=>{
+            window.location.href = '/login';
+        }, 3000);
+    </script>
+</head>
+<body>
+    <h1> Your password is incorrect </h1>
+    <h3>redirecting to home page in 3 seconds...</h3>
+</body>
+</html>

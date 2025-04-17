@@ -105,14 +105,14 @@ const login = (req, res, next) => {
 
     const {fullName, password} = req.body;
     
-    fs.readFile(path.join(__dirname, '/users', `${fullName}.json`), (data, err) => {
+    fs.readFile(path.join(__dirname, `/users/${fullName}/`, `${fullName}.json`), (err, data) => {
         if (err){
             console.error("something went wrong with reading users", err.message);
-            return res.send("something went wrong");
+            return res.status(404).redirect('/404');
         }
         const jsoned = JSON.parse(data);
-        if(jsoned.natCode === pass) res.sendFile(path.join(__dirname, '/src/pages', 'users.html'));
-        next();
+        if(jsoned.natCode === password) res.sendFile(path.join(__dirname, '/src/pages', 'users.html'));
+        else res.redirect('/wrongPass');
     })
 }
 
@@ -140,6 +140,14 @@ app.get('/signin', (req, res) => {
 
 app.get('/success', (req, res)=>{
 	res.sendFile(path.join(__dirname, "/src/pages/", "redirect.html"));
+});
+
+app.get('/404', (req, res)=>{
+	res.sendFile(path.join(__dirname, "/src/pages/", "notFound.html"));
+});
+
+app.get('/wrongPass', (req, res)=>{
+	res.sendFile(path.join(__dirname, "/src/pages/", "wrongPass.html"));
 });
 
 app.get('/update', (req, res) => {

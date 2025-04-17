@@ -61,7 +61,7 @@ input::placeholder{
 
 legend{
     font-family: reborn;
-    font-size: 1rem;
+    font-size: 2rem;
     width: auto;
     height: auto;
     text-align: center;
@@ -70,10 +70,13 @@ legend{
 
 input[type=submit]{
     width: 20%;
-    height: auto;
+    height: 5vh;
     background-color: #423f32;
     color: #eae0c8;
     font-family: reborn;
     margin-left: 80%;
     margin-top: 5%;
+    cursor: pointer;
+    border-radius: .5rem;
+    font-size: 0.75rem;
 }

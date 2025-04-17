@@ -83,7 +83,7 @@ header{
     height: 10vh;
     top: 5%;
     left: 5%;
-    background-color: beige;
+    background-color: rgba(255,255,255,0.4);
     color: #423f32;
     border-radius: .5rem;
     position: fixed;
@@ -112,7 +112,7 @@ a{
 }
 
 .logo{
-    background: linear-gradient(to right, beige, #423f32);
+    background: linear-gradient(to right, transparent, #423f32);
     width: 20%;
 }
 

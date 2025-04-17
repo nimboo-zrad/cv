@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/src/styles/base.css">
+    <link rel="stylesheet" href="/src/styles/users.css">
+    <script src="/src/scripts/users.js"></script>
+    <title>Users</title>
 </head>
 <body>
-    <h1>Hi there</h1>
+    <div class="portrait">
+        <h1>Rotate your phone/tablet! </h1>
+    </div>
+    <header>
+        <a href="/" class="logo">
+            <img src="/src/pics/committeeLogo.svg" class="logoImage">
+            <div class="logoText">
+                <p>Research</p>
+                <p>Committee</p>
+            </div>
+        </a>
+        
+        <div class="itemsContainer">
+            <div class="login" ><a href="/login">Login</a></div>
+            <div class="update"><a href="/update">Update</a></div>
+            <div class="about"><a href="/about">About</a></div>
+        </div>
+        <div class="signIn"><a href="/signin">Sign-In</a></div>
+    </header>
+    <main>
+        <div class="demographic">
+            <img src="/users">
+            <p class="info name"></p>
+            <p class="info stuCode"></p>
+        </div>
+        <div class="container">
+            <div class="skills"></div>
+            <div class="research"></div>
+            <div class="executive"></div>
+            <div class="activities"></div>
+        </div>
+    </main>
 </body>
 </html>
