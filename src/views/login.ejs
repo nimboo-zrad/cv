@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
     <link rel="stylesheet" href="/src/styles/base.css">
     <link rel="stylesheet" href="/src/styles/users.css">
     <script src="/src/scripts/users.js"></script>
-    <title>Users</title>
 </head>
 <body>
     <div class="portrait">
@@ -30,15 +30,38 @@
     </header>
     <main>
         <div class="demographic">
-            <img src="/users">
-            <p class="info name"></p>
-            <p class="info stuCode"></p>
+            <img src="<%= image %>" alt="profile photo">
+            <p class="info name"><%= title %></p>
+            <p class="info stuCode"><%= stuCode %></p>
         </div>
         <div class="container">
-            <div class="skills"></div>
-            <div class="research"></div>
-            <div class="executive"></div>
-            <div class="activities"></div>
+            <div class="skills">
+                <h1>Skills: </h1>
+                <% Object.entries(skills).forEach(([key, val]) => { %>
+                    <p><%= val %></p>
+                <% }) %>
+            </div>
+
+            <div class="research">
+                <h1>Researchs: </h1>
+                <% Object.entries(research).forEach(([key, val]) => { %>
+                    <p><%= val %></p>
+                <% }) %>
+            </div>
+
+            <div class="executive">
+                <h1>Executives: </h1>
+                <% Object.entries(executive).forEach(([key, val]) => { %>
+                    <p><%= val %></p>
+                <% }) %>
+            </div>
+            
+            <div class="activities">
+                <h1>Activities: </h1>
+                <% Object.entries(activities).forEach(([key, val]) => { %>
+                    <p><%= val %></p>
+                <% }) %>
+            </div>
         </div>
     </main>
 </body>

@@ -18,6 +18,8 @@ const __dirname = path.dirname(__filename);
 app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({extended: true}));
 app.use(fileUpload());
+app.set('views', path.join(__dirname, '/src', 'views'));
+app.set('view engine', 'ejs');
 
 //listen:
 
@@ -111,9 +113,45 @@ const login = (req, res, next) => {
             return res.status(404).redirect('/404');
         }
         const jsoned = JSON.parse(data);
-        if(jsoned.natCode === password) res.sendFile(path.join(__dirname, '/src/pages', 'users.html'));
+        if(jsoned.natCode === password) next();
         else res.redirect('/wrongPass');
     })
+}
+
+const loadingUser = (req, res) => {
+    const {fullName} = req.body;
+    const data = fs.readFileSync(path.join(__dirname, `users/${fullName}`, `${fullName}.json`), 'utf8');
+    const newData = JSON.parse(data);
+
+    //profile photo:
+    const profilePhotoBase = newData.photo.toString('base64');
+    const profilePhoto = `data:image/png;base64, ${profilePhotoBase}`;
+    
+    //skills:
+    const skills = Object.keys(newData).filter(key => key.includes('skill')).reduce((obj, key) => {
+        obj[key] = newData[key];
+        return obj;
+    }, {});
+
+    //research:
+    const research = Object.keys(newData).filter(key => key.includes('research')).reduce((obj, key) => {
+        obj[key] = newData[key];
+        return obj;
+    }, {});
+
+    //executive:
+    const executive = Object.keys(newData).filter(key => key.includes('executive')).reduce((obj, key) => {
+        obj[key] = newData[key];
+        return obj;
+    }, {});
+
+    //activities:
+    const activities = Object.keys(newData).filter(key => key.includes('activities')).reduce((obj, key) => {
+        obj[key] = newData[key];
+        return obj;
+    }, {});
+
+    res.render('login', {title: fullName, image: profilePhoto, stuCode: newData.stuCode, skills, research, executive, activities});
 }
 
 //post:
@@ -122,7 +160,7 @@ app.post('/submit', formProcess , photoProcess, (req, res) => {
     res.redirect('/success');
 });
 
-app.post('/login', login);
+app.post('/login', login, loadingUser);
 
 //get
 
