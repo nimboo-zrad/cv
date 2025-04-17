@@ -10,7 +10,6 @@ main{
     height: 70vh;
     margin-left: 5vw;
     margin-top: 20vh;
-    overflow: auto;
     padding: 2% 2%;
     display: flex;
 }
@@ -28,15 +27,20 @@ main{
 .container{
     width: 75%;
     height: 100%;
-    background-color: green;
     padding: 2% 2%;
+    font-family: roboto;
+    overflow: auto;
 }
 
 .container div{
     width: 100%;
     height: auto;
-    background: orange;
     border-top: black solid .1rem;
+    padding: 5% 0;
+}
+
+.activities{
+    border-bottom: solid .1rem black;
 }
 
 .container div p{

@@ -103,6 +103,9 @@ const photoProcess = (req, res, next) => {
 };
 
 const login = (req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     console.log(req.body);
 
     const {fullName, password} = req.body;
@@ -127,29 +130,24 @@ const loadingUser = (req, res) => {
     const profilePhotoBase = newData.photo.toString('base64');
     const profilePhoto = `data:image/png;base64, ${profilePhotoBase}`;
     
+
+    const filterProperties = (sub) => {
+        return Object.keys(newData).filter(key => key.includes(sub)).reduce((obj, key) => {
+            obj[key] = newData[key];
+            return obj;
+        }, {});
+    }
     //skills:
-    const skills = Object.keys(newData).filter(key => key.includes('skill')).reduce((obj, key) => {
-        obj[key] = newData[key];
-        return obj;
-    }, {});
+    const skills = filterProperties('skill');
 
     //research:
-    const research = Object.keys(newData).filter(key => key.includes('research')).reduce((obj, key) => {
-        obj[key] = newData[key];
-        return obj;
-    }, {});
+    const research = filterProperties('Research');
 
     //executive:
-    const executive = Object.keys(newData).filter(key => key.includes('executive')).reduce((obj, key) => {
-        obj[key] = newData[key];
-        return obj;
-    }, {});
+    const executive = filterProperties('Executive');
 
     //activities:
-    const activities = Object.keys(newData).filter(key => key.includes('activities')).reduce((obj, key) => {
-        obj[key] = newData[key];
-        return obj;
-    }, {});
+    const activities = filterProperties('Activity');
 
     res.render('login', {title: fullName, image: profilePhoto, stuCode: newData.stuCode, skills, research, executive, activities});
 }
