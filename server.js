@@ -2,10 +2,8 @@ import express from 'express';
 import path from 'path';
 import url from 'url';
 import fs from 'fs';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import fileUpload from 'express-fileupload';
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;

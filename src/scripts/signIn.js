@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tac = document.querySelectorAll(".totalAreaContainer");
     const photoInput = document.querySelector(".photo");
     const photoPrev = document.querySelector(".photoInput");
-    
+
     let vars = {
     	var0: 2,
         var1: 2,
@@ -16,7 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
   let word = "";
-    
+
+  document.querySelector("form").addEventListener("keydown", (event) => {
+    if(event.key === "Enter"){
+        let target = event.target;
+        if(target.type !== 'button') event.preventDefault();
+    }
+  });
+
   addel.forEach((elem, index)=> {
   	elem.addEventListener("click", ()=>{
   	    if(index === 0) word = "Skill";
