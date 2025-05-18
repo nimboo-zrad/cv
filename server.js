@@ -136,7 +136,7 @@ const loadingUser = (req, res) => {
         }, {});
     }
     //skills:
-    const skills = filterProperties('skill');
+    const skills = filterProperties('Skill');
 
     //research:
     const research = filterProperties('Research');
@@ -147,7 +147,7 @@ const loadingUser = (req, res) => {
     //activities:
     const activities = filterProperties('Activity');
 
-    res.render('login', {title: fullName, image: profilePhoto, stuCode: newData.stuCode, skills, research, executive, activities});
+    res.render('login', {role: newData.role, title: fullName, image: profilePhoto, stuCode: newData.stuCode, skills, research, executive, activities});
 }
 
 //post:
